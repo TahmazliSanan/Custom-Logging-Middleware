@@ -19,9 +19,9 @@ namespace CustomLoggingMiddleware.Controllers
         [HttpGet("/get/{id:int}")]
         public IActionResult GetEmployee(int id)
         {
-            var employee = Employees.FirstOrDefault(e => e.Id == id);
-            if (employee is null) return NotFound();
-            return Ok(employee);
+            var foundEmployee = Employees.FirstOrDefault(e => e.Id == id);
+            if (foundEmployee is null) return NotFound();
+            return Ok(foundEmployee);
         }
 
         [HttpGet("/get/all")]
