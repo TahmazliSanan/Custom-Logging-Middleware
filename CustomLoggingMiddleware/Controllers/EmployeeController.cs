@@ -1,4 +1,5 @@
-﻿using CustomLoggingMiddleware.Models;
+﻿using CustomLoggingMiddleware.Dtos;
+using CustomLoggingMiddleware.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomLoggingMiddleware.Controllers
@@ -31,13 +32,13 @@ namespace CustomLoggingMiddleware.Controllers
         }
 
         [HttpPut("/update/{id:int}")]
-        public IActionResult UpdateEmployee(int id, [FromBody] Employee employee)
+        public IActionResult UpdateEmployee(int id, [FromBody] EmployeeUpdateDto employeeDto)
         {
             var foundEmployee = Employees.FirstOrDefault(e => e.Id == id);
             if (foundEmployee is null) return NotFound();
-            foundEmployee.Position = employee.Position;
-            foundEmployee.Salary = employee.Salary;
-            foundEmployee.IsManager = employee.IsManager;
+            foundEmployee.Position = employeeDto.Position;
+            foundEmployee.Salary = employeeDto.Salary;
+            foundEmployee.IsManager = employeeDto.IsManager;
             return Ok(foundEmployee);
         }
 
